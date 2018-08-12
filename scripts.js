@@ -63,8 +63,11 @@ function showWord() {
     case 10: case 11: case 12: case 13: case 14:
       output(2);
       break;
-    default:
+    case 15: case 16: case 17: case 18: case 19: case 20:
       output(1);
+      break;
+    default:
+      output(0);
   }
 
   if (++iterator < listOfWords.length && runFlag) {
