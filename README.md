@@ -4,7 +4,12 @@
 
 ### Versions
 
-#### v0.93 (08/12/2018):
+#### v0.93b (08/12/2018):
+
+Bug fix:
+- changed hotkey for rewind to "9" because Mozilla uses "/" for something else
+
+#### v0.93a (08/12/2018):
 
 New features:
 - now splits words longer than 13 characters

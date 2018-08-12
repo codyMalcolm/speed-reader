@@ -162,7 +162,7 @@ function handleKey(e) {
       handleStartClick();
     }
   }
-  if (e.key === '/') {
+  if (e.key === '9') {
     if (timer) --iterator && clearTimeout(timer);
     iterator = iterator >= 5 ? iterator - 5 : 0;
     if (listOfWords.length > 0) {
