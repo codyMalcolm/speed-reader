@@ -22,6 +22,10 @@ pauseButton.addEventListener('click', handlePauseClick);
 startButton.addEventListener('click', handleStartClick);
 displayButton.addEventListener('click', handleDisplayClick);
 
+// TODO: Add a display for current speed
+// TODO: Display/hide the pause/start buttons when paused/playing
+// TODO: Check for content before hiding input box
+
 function showWord() {
   const word = listOfWords[iterator];
   const length = word.length;
@@ -49,7 +53,7 @@ function showWord() {
   });
 
   letters.forEach((l, i) => {
-    display[indexKeys[length]+i].textContent = l;
+    if (i < 30) (display[indexKeys[length]+i] || i+1).textContent = l;
   })
 
   if (letters[letters.length-1] === ".") {
@@ -95,6 +99,7 @@ function handleStartClick() {
 }
 
 function handleDisplayClick() {
+  if (timer) clearTimeout(timer);
   runFlag = true;
   iterator = 0;
   listOfWords = parseInput(inputField.value);
@@ -115,6 +120,20 @@ function handleKey(e) {
   }
   if (e.key === '-') {
     speedFactor -= 0.1;
+  }
+  if (e.key === '*') {
+    if (runFlag) {
+      handlePauseClick();
+    } else {
+      handleStartClick();
+    }
+  }
+  if (e.key === '/') {
+    if (timer) --iterator && clearTimeout(timer);
+    iterator = iterator >= 5 ? iterator - 5 : 0;
+    if (listOfWords.length > 0) {
+      showWord();
+    }
   }
 }
 

@@ -4,10 +4,22 @@
 
 ### Versions
 
-#### v 0.91:
+#### v0.92 (08/12/2018):
 
 New features:
-- added a pause at the end of each sentence
+- add a pause hotkey ("\*")
+- add a rewind 5 hotkey ("/")
+
+Bug fixes:
+- stopped speed from increasing when run multiple times without any other buttons being pressed
+
+Bug patch:
+- stopped extra long words from completely crashing the playback. For now, the word will not display. In v0.93 longer words will be split and shorter words with hypens will keep their hyphens.
+
+#### v0.91 (08/12/2018):
+
+New features:
+- added a short extra delay at the end of each sentence
 - added a second rewind button
 - playback will now have a small delay for words that end with "."
 
@@ -16,7 +28,7 @@ Bug fixes:
 - fixed a bug that would cause an error if certain buttons were pressed before input was entered
 
 
-#### v 0.9:
+#### v0.9:
 
 Initial deploy, currently a few bugs.
 
