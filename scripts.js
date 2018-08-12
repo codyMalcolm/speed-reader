@@ -109,8 +109,42 @@ function handleDisplayClick() {
 }
 
 function parseInput(input) {
-  const regexSplit = /\s|-/;
-  let response = input.split(regexSplit);
+  let response = [];
+  const regexSplit = /\r|\s|\t/
+  function addHyphens(word) {
+    const len = word.length;
+    const hyphensToAdd = Math.floor((len - 1) / 13);
+    const chars = len / (hyphensToAdd + 1);
+    for (let i = 0; i < hyphensToAdd; i++) {
+      response.push(word.slice(i*chars, (i+1)*chars)+"-");
+    }
+    response.push(word.slice(chars*hyphensToAdd));
+  }
+
+  input.split(regexSplit).forEach(w => {
+    if (w.length < 14) {
+      response.push(w);
+      return;
+    } else if (/-/.test(w)) {
+      let words = w.split("-")
+      for (let i = 0; i < words.length-1; i++) {
+        if (words[i] && words[i].length < 14) {
+          response.push(words[i] + "-");
+        } else {
+          addHyphens(words[i]);
+        }
+      }
+      if (words[words.length-1] && words[words.length-1].length < 14) {
+        response.push(words[words.length-1]);
+      } else {
+        addHyphens(words[words.length-1]);
+      }
+    } else {
+      addHyphens(w);
+
+    }
+  });
+
   return response;
 }
 

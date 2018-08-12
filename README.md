@@ -4,6 +4,16 @@
 
 ### Versions
 
+#### v0.93 (08/12/2018):
+
+New features:
+- now splits words longer than 13 characters
+
+Bug fixes:
+- corrected the program to properly handle tabs and carriage returns
+- no longer strips hyphens, and only splits hyphenated words if they are greater than 13 total characters
+- now splits words longer than 13 characters into chunks not longer than 13 characters and hyphenates them
+
 #### v0.92 (08/12/2018):
 
 New features:
