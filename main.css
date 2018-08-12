@@ -7,9 +7,13 @@ header {
   height: 15vh;
   background-color: red;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  flex-direction: column;
+  align-items: center;
   color: white;
+}
+
+header p {
+  width: 50%;
 }
 
 footer {
@@ -69,7 +73,7 @@ textarea {
   width: 90%;
   height: 70%;
   display: none;
-  background-color: pink;
+  background-color: white;
   border: 1px solid grey;
   padding: 0.5em;
 }
