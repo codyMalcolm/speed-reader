@@ -12,6 +12,7 @@ const displayButton = document.querySelector('[name=display-button]');
 const display = document.querySelectorAll('[data-index]');
 const inputField = document.querySelector('[name=input]');
 const tracker = document.querySelector('.output-tracker');
+const indexKeys = [5, 5, 5, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 resetButton.addEventListener('click', handleResetClick);
 rewindButton.addEventListener('click', handleRewindClick);
@@ -44,31 +45,9 @@ function showWord() {
     n.textContent = "";
   });
 
-  function output(startIndex) {
-    for (let i = 0, j = startIndex; i < length; i++, j++){
-      display[j].textContent = letters[i];
-    }
-  }
-
-  switch (length) {
-    case 1: case 2:
-      output(5);
-      break;
-    case 3: case 4: case 5:
-      output(4);
-      break;
-    case 6: case 7: case 8: case 9:
-      output(3);
-      break;
-    case 10: case 11: case 12: case 13: case 14:
-      output(2);
-      break;
-    case 15: case 16: case 17: case 18: case 19: case 20:
-      output(1);
-      break;
-    default:
-      output(0);
-  }
+  letters.forEach((l, i) => {
+    display[indexKeys[length]+i].textContent = l;
+  })
 
   if (++iterator < listOfWords.length && runFlag) {
     setTimeout(showWord, (length*20+100)/speedFactor)
