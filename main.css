@@ -1,0 +1,75 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  height: 15vh;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: white;
+}
+
+footer {
+  height: 60vh;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  height: 25vh;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(20, 1fr);
+}
+
+.ltr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-family: sans-serif;
+}
+
+.center {
+  color: red;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
+
+textarea {
+  width: 90%;
+  height: 70%;
+}
+
+.output-tracker {
+  width: 90%;
+  height: 70%;
+  display: none;
+  background-color: pink;
+  border: 1px solid grey;
+  padding: 0.5em;
+}
+
+.tracker-current {
+  background-color: yellow;
+}
+
+.tracker {
+  display: inline;
+}
