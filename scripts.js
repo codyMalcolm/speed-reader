@@ -3,9 +3,8 @@ let speedFactor = 1;
 let iterator = 0;
 let runFlag = true;
 
-const regexSplit = /\s|-/;
 const resetButton = document.querySelector('[name=reset-button]');
-const rewindButton = document.querySelector('[name=rewind-button]');
+const rewindButtons = document.querySelectorAll('[data-words]');
 const pauseButton = document.querySelector('[name=pause-button]');
 const startButton = document.querySelector('[name=start-button]');
 const displayButton = document.querySelector('[name=display-button]');
@@ -13,9 +12,12 @@ const display = document.querySelectorAll('[data-index]');
 const inputField = document.querySelector('[name=input]');
 const tracker = document.querySelector('.output-tracker');
 const indexKeys = [5, 5, 5, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let timer;
 
 resetButton.addEventListener('click', handleResetClick);
-rewindButton.addEventListener('click', handleRewindClick);
+rewindButtons.forEach(b => {
+  b.addEventListener('click', handleRewindClick)
+});
 pauseButton.addEventListener('click', handlePauseClick);
 startButton.addEventListener('click', handleStartClick);
 displayButton.addEventListener('click', handleDisplayClick);
@@ -24,6 +26,7 @@ function showWord() {
   const word = listOfWords[iterator];
   const length = word.length;
   const letters = word.split('');
+  let pauseFactor = 1;
 
   let trackerBefore = '';
   const trackerCurrent = listOfWords[iterator];
@@ -49,41 +52,61 @@ function showWord() {
     display[indexKeys[length]+i].textContent = l;
   })
 
+  if (letters[letters.length-1] === ".") {
+    pauseFactor *= 2;
+  }
+
   if (++iterator < listOfWords.length && runFlag) {
-    setTimeout(showWord, (length*20+100)/speedFactor)
+    timer = setTimeout(showWord, ((length*20+100)/speedFactor) * pauseFactor)
   }
 }
 
 function handleResetClick() {
   runFlag = false;
+  if (timer) --iterator && clearTimeout(timer);
   iterator = 0;
   inputField.style.display = 'block';
   tracker.style.display = 'none';
 }
 
-function handleRewindClick() {
+function handleRewindClick(e) {
   runFlag = false;
-  iterator = iterator >= 15 ? iterator - 15 : 0;
-  showWord();
+  if (timer) --iterator && clearTimeout(timer);
+  const amount = e.target.dataset.words;
+  iterator = iterator >= amount ? iterator - amount : 0;
+  if (listOfWords.length > 0) {
+    showWord();
+  }
 }
 
 function handlePauseClick() {
   runFlag = false;
-  showWord();
+  if (timer) --iterator && clearTimeout(timer);
+  if (listOfWords.length > 0) {
+    showWord();
+  }
 }
 
 function handleStartClick() {
   runFlag = true;
-  showWord();
+  if (listOfWords.length > 0) {
+    showWord();
+  }
 }
 
 function handleDisplayClick() {
   runFlag = true;
   iterator = 0;
-  listOfWords = inputField.value.split(regexSplit);
+  listOfWords = parseInput(inputField.value);
   inputField.style.display = 'none';
   tracker.style.display = 'block';
   showWord();
+}
+
+function parseInput(input) {
+  const regexSplit = /\s|-/;
+  let response = input.split(regexSplit);
+  return response;
 }
 
 function handleKey(e) {
