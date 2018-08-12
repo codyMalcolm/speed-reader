@@ -32,7 +32,15 @@ form {
 .main {
   height: 25vh;
   display: grid;
-  grid-template: repeat(3, 1fr) / repeat(20, 1fr);
+  grid-template: repeat(3, 1fr) / repeat(30, 1fr);
+}
+
+.left {
+  grid-column: 1 / span 5;
+}
+
+.right {
+  grid-column: 7 / span 24;
 }
 
 .ltr {
