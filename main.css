@@ -1,6 +1,16 @@
+/* TODO: Add mobile responsivity */
+
 body {
   display: flex;
   flex-direction: column;
+}
+
+a {
+  color: pink;
+}
+
+a:hover {
+  color: aqua;
 }
 
 header {
